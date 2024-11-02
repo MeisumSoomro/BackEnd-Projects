@@ -1,0 +1,171 @@
+=== TASK TRACKER COMMAND GUIDE ===
+
+BASIC SYNTAX
+-----------
+1. Add Task:
+   python task_tracker.py add "Title" "Description"
+
+2. List Tasks:
+   python task_tracker.py list
+   python task_tracker.py list --status TODO
+   python task_tracker.py list --status IN_PROGRESS
+   python task_tracker.py list --status DONE
+
+3. Update Task:
+   python task_tracker.py update <task_id> --title "New Title"
+   python task_tracker.py update <task_id> --description "New Description"
+   python task_tracker.py update <task_id> --title "New Title" --description "New Description"
+
+4. Change Status:
+   python task_tracker.py status <task_id> TODO
+   python task_tracker.py status <task_id> IN_PROGRESS
+   python task_tracker.py status <task_id> DONE
+
+5. Delete Task:
+   python task_tracker.py delete <task_id>
+
+6. Help Commands:
+   python task_tracker.py -h
+   python task_tracker.py add -h
+   python task_tracker.py list -h
+   python task_tracker.py update -h
+   python task_tracker.py status -h
+   python task_tracker.py delete -h
+
+
+PRACTICAL EXAMPLES
+----------------
+1. Work Tasks:
+   python task_tracker.py add "[WORK] Weekly Report" "Complete Q1 sales report - Due Friday"
+   python task_tracker.py add "[WORK] Team Meeting" "Prepare presentation slides for Monday"
+
+2. Study Tasks:
+   python task_tracker.py add "[STUDY] Math Assignment" "Complete exercises 1-10 from Chapter 3"
+   python task_tracker.py add "[STUDY] Research Paper" "Write introduction section - Due next week"
+
+3. Personal Tasks:
+   python task_tracker.py add "[PERSONAL] Groceries" "Buy: milk, eggs, bread"
+   python task_tracker.py add "[PERSONAL] Gym" "30min cardio + strength training"
+
+4. Project Tasks:
+   python task_tracker.py add "[PROJECT] Backend" "Implement user authentication"
+   python task_tracker.py add "[PROJECT] Database" "Create initial schema"
+
+
+ORGANIZATION TIPS
+---------------
+1. Use Consistent Prefixes:
+   [WORK] - Work-related tasks
+   [STUDY] - Educational tasks
+   [PERSONAL] - Personal tasks
+   [PROJECT] - Project tasks
+   [URGENT] - High-priority tasks
+
+2. Include Deadlines in Description:
+   "Task description - Due: MM/DD/YY"
+   "Task description - Deadline: Tomorrow 5PM"
+
+3. Priority Markers:
+   [P1] - High priority
+   [P2] - Medium priority
+   [P3] - Low priority
+
+4. Status Management:
+   - Mark tasks as IN_PROGRESS when you start working
+   - Update description with progress notes
+   - Mark DONE when completed
+
+EXAMPLE WORKFLOW
+--------------
+1. Morning Review:
+   python task_tracker.py list --status TODO
+
+2. Start Working:
+   python task_tracker.py status 1 IN_PROGRESS
+
+3. Update Progress:
+   python task_tracker.py update 1 --description "70% complete - pending final review"
+
+4. Complete Task:
+   python task_tracker.py status 1 DONE
+
+5. Add New Tasks:
+   python task_tracker.py add "[WORK] New Task" "Description with deadline"
+
+
+BEST PRACTICES
+------------
+1. Be Specific:
+   - Use clear, actionable titles
+   - Include deadlines in descriptions
+   - Add context and requirements
+
+2. Regular Updates:
+   - Review TODO list daily
+   - Update task status regularly
+   - Delete completed tasks periodically
+
+3. Task Description Format:
+   - What needs to be done
+   - When it's due
+   - Any dependencies
+   - Priority level
+
+4. Status Usage:
+   TODO - Not started
+   IN_PROGRESS - Currently working
+   DONE - Completed
+
+Remember: Keep descriptions clear and include all relevant information when creating tasks. Regular updates help maintain an accurate task list. 
+
+PRIORITY MANAGEMENT
+-----------------
+Priority Levels:
+P1 - High priority (urgent/important)
+P2 - Medium priority (important but not urgent)
+P3 - Low priority (can wait)
+
+1. Add Task with Priority:
+   # Add high priority task
+   python task_tracker.py add "[URGENT] Client Meeting" "Prepare presentation" --priority P1
+   
+   # Add medium priority task
+   python task_tracker.py add "[WORK] Weekly Report" "Complete sales report" --priority P2
+   
+   # Add low priority task (default)
+   python task_tracker.py add "[PERSONAL] Reading" "Read chapter 5"
+
+2. Update Task Priority:
+   python task_tracker.py update 1 --priority P1
+
+3. List Tasks by Priority:
+   # List all high priority tasks
+   python task_tracker.py list --priority P1
+   
+   # List high priority TODO tasks
+   python task_tracker.py list --priority P1 --status TODO
+
+PRIORITY BEST PRACTICES
+---------------------
+1. Use P1 (High) for:
+   - Urgent deadlines
+   - Critical issues
+   - Important meetings
+   - Client deliverables
+
+2. Use P2 (Medium) for:
+   - Regular work tasks
+   - Weekly deadlines
+   - Team meetings
+   - Project milestones
+
+3. Use P3 (Low) for:
+   - Nice-to-have items
+   - Personal development
+   - Long-term goals
+   - Routine tasks
+
+4. Regular Priority Review:
+   - Review and adjust priorities daily
+   - Move tasks up/down based on deadlines
+   - Don't overuse P1 priority

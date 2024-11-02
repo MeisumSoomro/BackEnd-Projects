@@ -1,0 +1,20 @@
+# Quick Commands
+tasks quick "Read emails" "Check and respond to important emails"
+tasks urgent "Client meeting" "Prepare presentation for client"
+
+# Status Overview
+tasks today          # Show today's TODO and IN_PROGRESS tasks
+tasks pending        # Show all incomplete tasks
+
+# Quick Status Changes
+tasks start 1        # Start working on task #1
+tasks finish 1       # Mark task #1 as complete
+
+# Priority with Status
+tasks p1todo         # Show high priority TODO tasks
+tasks p1prog         # Show high priority in-progress tasks
+
+# Original Commands Still Work
+tasks add "Task Title" "Description" P1
+tasks list
+tasks update 1 "New Title" 

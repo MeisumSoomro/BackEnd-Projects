@@ -1,0 +1,35 @@
+:: Help commands
+python task_tracker.py -h
+python task_tracker.py add -h
+python task_tracker.py list -h
+python task_tracker.py update -h
+python task_tracker.py status -h
+python task_tracker.py delete -h
+
+:: Add some tasks
+python task_tracker.py add "Complete homework" "Finish math assignments by Friday"
+python task_tracker.py add "Buy groceries" "Get milk, eggs, and bread"
+python task_tracker.py add "Call dentist" "Schedule annual checkup"
+
+:: List all tasks
+python task_tracker.py list
+
+:: List tasks by status
+python task_tracker.py list --status TODO
+python task_tracker.py list --status IN_PROGRESS
+python task_tracker.py list --status DONE
+
+:: Change task status
+python task_tracker.py status 1 IN_PROGRESS
+python task_tracker.py status 2 DONE
+python task_tracker.py status 3 IN_PROGRESS
+
+:: Update task details
+python task_tracker.py update 1 --title "Complete math homework" --description "Finish algebra exercises by Friday"
+python task_tracker.py update 2 --description "Get milk, eggs, bread, and cheese"
+
+:: Delete a task
+python task_tracker.py delete 3
+
+:: Final check of all tasks
+python task_tracker.py list 

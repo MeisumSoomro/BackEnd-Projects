@@ -1,0 +1,36 @@
+# Save the batch file as 'tasks.bat' in the same directory as task_tracker.py
+# Then use these shorter commands:
+
+# Show help
+tasks
+
+# Add tasks
+tasks add "Study Python" "Complete chapter 3" P1
+tasks add "Buy groceries" "Milk, eggs, bread" P3
+
+# List tasks
+tasks list              # List all tasks
+tasks todo              # List TODO tasks
+tasks prog              # List in-progress tasks
+tasks done              # List completed tasks
+
+# List by priority
+tasks p1                # List high priority tasks
+tasks p2                # List medium priority tasks
+tasks p3                # List low priority tasks
+
+# Update task
+tasks update 1 "New Title" "New Description" P2
+tasks update 1 "New Title"                    # Update only title
+tasks update 1 "" "New Description"           # Update only description
+tasks update 1 "" "" P1                       # Update only priority
+
+# Change status
+tasks status 1 IN_PROGRESS
+tasks status 2 DONE
+
+# Delete task
+tasks del 1
+
+# Get detailed help
+tasks help 
