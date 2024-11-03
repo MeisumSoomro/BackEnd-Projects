@@ -1,126 +1,49 @@
-=== TASK TRACKER SCRIPT USAGE GUIDE ===
+=== TASK TRACKER COMMAND GUIDE ===
 
-WINDOWS (tasks.bat)
-------------------
-1. Setup:
-   - Save tasks.bat in the same directory as task_tracker.py
-   - Make sure Python is installed and in your PATH
-   - Open Command Prompt (CMD)
+BASIC USAGE
+-----------
+1. Add Task:
+   python task_tracker.py add "Task description"
 
-2. Basic Usage:
-   tasks                    # Show help menu
-   tasks help               # Show detailed help
+2. List Tasks:
+   python task_tracker.py list
+   python task_tracker.py list --status todo
+   python task_tracker.py list --status in-progress
+   python task_tracker.py list --status done
 
-3. Task Management:
-   # Adding Tasks
-   tasks add "Task Title" "Task Description" P1
-   tasks add "Study Python" "Complete Chapter 3" P2
-   
-   # Listing Tasks
-   tasks list              # All tasks
-   tasks todo              # TODO tasks
-   tasks prog              # In Progress tasks
-   tasks done             # Completed tasks
-   
-   # Priority Views
-   tasks p1               # High priority tasks
-   tasks p2               # Medium priority tasks
-   tasks p3               # Low priority tasks
-   
-   # Updating Tasks
-   tasks update 1 "New Title" "New Description" P1
-   tasks update 1 "New Title"                    # Update title only
-   tasks update 1 "" "New Description"           # Update description only
-   tasks update 1 "" "" P2                       # Update priority only
-   
-   # Changing Status
-   tasks status 1 TODO
-   tasks status 1 IN_PROGRESS
-   tasks status 1 DONE
-   
-   # Deleting Tasks
-   tasks del 1
+3. Update Status:
+   python task_tracker.py status <task_id> <new_status>
+   Example: python task_tracker.py status 1 in-progress
 
+4. Delete Task:
+   python task_tracker.py delete <task_id>
+   Example: python task_tracker.py delete 1
 
-LINUX/MAC (tasks.sh)
--------------------
-1. Setup:
-   - Save tasks.sh in the same directory as task_tracker.py
-   - Make executable: chmod +x tasks.sh
-   - Make sure Python is installed
+SCRIPT SHORTCUTS
+---------------
+Windows (tasks.bat):
+- tasks add "Description"
+- tasks list
+- tasks status 1 in-progress
+- tasks delete 1
 
-2. Basic Usage:
-   ./tasks.sh                    # Show help menu
-   ./tasks.sh help               # Show detailed help
+Unix/Linux (tasks.sh):
+- ./tasks.sh add "Description"
+- ./tasks.sh list
+- ./tasks.sh status 1 in-progress
+- ./tasks.sh delete 1
 
-3. Task Management:
-   # Adding Tasks
-   ./tasks.sh add "Task Title" "Task Description" P1
-   ./tasks.sh add "Study Python" "Complete Chapter 3" P2
-   
-   # Listing Tasks
-   ./tasks.sh list              # All tasks
-   ./tasks.sh todo              # TODO tasks
-   ./tasks.sh prog              # In Progress tasks
-   ./tasks.sh done             # Completed tasks
-   
-   # Priority Views
-   ./tasks.sh p1               # High priority tasks
-   ./tasks.sh p2               # Medium priority tasks
-   ./tasks.sh p3               # Low priority tasks
-   
-   # Updating Tasks
-   ./tasks.sh update 1 "New Title" "New Description" P1
-   ./tasks.sh update 1 "New Title"                    # Update title only
-   ./tasks.sh update 1 "" "New Description"           # Update description only
-   ./tasks.sh update 1 "" "" P2                       # Update priority only
-   
-   # Changing Status
-   ./tasks.sh status 1 TODO
-   ./tasks.sh status 1 IN_PROGRESS
-   ./tasks.sh status 1 DONE
-   
-   # Deleting Tasks
-   ./tasks.sh del 1
+ERROR HANDLING
+-------------
+- Invalid commands show usage help
+- Invalid task IDs show error message
+- Invalid status values show valid options
+- File errors show appropriate messages
 
-OPTIONAL SETUP FOR EASIER ACCESS
-------------------------------
-Windows:
-1. Add script directory to PATH:
-   - Open System Properties > Advanced > Environment Variables
-   - Edit Path variable
-   - Add full path to directory containing tasks.bat
-   - Restart CMD
-
-Linux/Mac:
-1. Create symlink:
-   sudo ln -s /full/path/to/tasks.sh /usr/local/bin/tasks
-   
-2. Or add to PATH in ~/.bashrc or ~/.zshrc:
-   export PATH="$PATH:/path/to/task/tracker"
-
-After setup, you can use 'tasks' command from any directory:
-tasks add "New Task" "Description" P1
-tasks list
-
-TIPS
-----
-1. Use quotes around titles and descriptions
-2. For descriptions with special characters:
-   - Windows: Use double quotes
-   - Linux/Mac: Use single or double quotes
-
-3. Priority levels:
-   P1 - High priority
-   P2 - Medium priority
-   P3 - Low priority (default)
-
-4. Task statuses:
-   TODO - Not started
-   IN_PROGRESS - Currently working
-   DONE - Completed
-
-5. Regular maintenance:
-   - Review tasks daily
-   - Update priorities as needed
-   - Clean up completed tasks 
+TASK PROPERTIES
+--------------
+- id: Unique identifier
+- description: Task description
+- status: todo/in-progress/done
+- createdAt: Creation timestamp
+- updatedAt: Last update timestamp

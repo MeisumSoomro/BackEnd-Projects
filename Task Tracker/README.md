@@ -2,27 +2,27 @@
 
 A command-line task management system built with Python that helps you organize and track your tasks efficiently.
 
-> Project inspired by [roadmap.sh Task Tracker Project](https://roadmap.sh/projects/task-tracker)
+> Project inspired by roadmap.sh Task Tracker Project
 
 ## Features
 
-- Task Management
-  - Create, update, and delete tasks
-  - Set task priorities (P1, P2, P3)
-  - Track task status (TODO, IN_PROGRESS, DONE)
-  - Add descriptions and timestamps
+### Task Management
+- Create, update, and delete tasks
+- Set task priorities (P1, P2, P3)
+- Track task status (TODO, IN_PROGRESS, DONE)
+- Add descriptions and timestamps
 
-- Task Organization
-  - Filter tasks by status
-  - Filter tasks by priority
-  - View pending tasks
-  - Track task history
+### Task Organization
+- Filter tasks by status
+- Filter tasks by priority
+- View pending tasks
+- Track task history
 
-- Quick Commands
-  - Quick task addition
-  - Urgent task creation
-  - Status changes
-  - Priority filtering
+### Quick Commands
+- Quick task addition
+- Urgent task creation
+- Status changes
+- Priority filtering
 
 ## Project Structure
 
@@ -47,11 +47,13 @@ This project is implemented in three levels:
 - Multi-user support
 - API integration
 
+
+
 ## Credits
 
-This project was developed following the requirements and guidelines from [roadmap.sh's Task Tracker Project](https://roadmap.sh/projects/task-tracker).
+This project was developed following the requirements and guidelines from roadmap.sh's Task Tracker Project.
 
-## License
+----------------------
+Project URL: https://roadmap.sh/projects/task-tracker
 
-This project is licensed under the MIT License - see the LICENSE file for details.
 
