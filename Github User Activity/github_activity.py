@@ -5,6 +5,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from datetime import datetime, timedelta
 import tempfile
+import time
 
 
 class Cache:
@@ -55,6 +56,47 @@ class Cache:
 cache = Cache()
 
 
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+RATE_LIMIT_REMAINING = 60  # Default unauthenticated rate limit
+
+
+def make_github_request(url):
+    """Make a GitHub API request with rate limit handling."""
+    global RATE_LIMIT_REMAINING
+    
+    headers = {
+        'User-Agent': 'GitHub-Activity-CLI'
+    }
+    
+    if GITHUB_TOKEN:
+        headers['Authorization'] = f'token {GITHUB_TOKEN}'
+    
+    try:
+        request = Request(url, headers=headers)
+        with urlopen(request) as response:
+            # Update rate limit from response headers
+            RATE_LIMIT_REMAINING = int(response.headers.get('X-RateLimit-Remaining', RATE_LIMIT_REMAINING))
+            
+            # If we're running low on requests, warn the user
+            if RATE_LIMIT_REMAINING < 10:
+                print(f"\nWarning: Only {RATE_LIMIT_REMAINING} API requests remaining!")
+                
+            # If we're out of requests, handle rate limiting
+            if RATE_LIMIT_REMAINING == 0:
+                reset_time = int(response.headers.get('X-RateLimit-Reset', 0))
+                wait_time = reset_time - int(time.time())
+                if wait_time > 0:
+                    print(f"\nRate limit exceeded. Waiting {wait_time} seconds...")
+                    time.sleep(wait_time)
+            
+            return json.loads(response.read().decode())
+    except HTTPError as error:
+        if error.code == 403 and 'rate limit exceeded' in str(error.reason).lower():
+            print("\nRate limit exceeded. Please try again later or use a GitHub token.")
+            print("Set your token as GITHUB_TOKEN environment variable.")
+        raise
+
+
 def get_user_activity(username, event_type=None, limit=10, use_cache=True):
     """
     Fetch user's GitHub activity using the GitHub API.
@@ -73,20 +115,15 @@ def get_user_activity(username, event_type=None, limit=10, use_cache=True):
     
     try:
         url = f"https://api.github.com/users/{username}/events"
-        headers = {
-            'User-Agent': 'GitHub-Activity-CLI'
-        }
-        request = Request(url, headers=headers)
-        with urlopen(request) as response:
-            activities = json.loads(response.read().decode())
-            
-            if event_type:
-                activities = [a for a in activities if a['type'] == event_type]
-            
-            if use_cache:
-                cache.set(username, activities, event_type)
-            
-            return activities[:limit]
+        activities = make_github_request(url)
+        
+        if event_type:
+            activities = [a for a in activities if a['type'] == event_type]
+        
+        if use_cache:
+            cache.set(username, activities, event_type)
+        
+        return activities[:limit]
             
     except HTTPError as error:
         if error.code == 404:
@@ -192,14 +229,8 @@ def print_available_events():
 def get_user_profile(username):
     """Fetch user profile information from GitHub API."""
     try:
-        # Fetch user data
         url = f"https://api.github.com/users/{username}"
-        headers = {
-            'User-Agent': 'GitHub-Activity-CLI'
-        }
-        request = Request(url, headers=headers)
-        with urlopen(request) as response:
-            return json.loads(response.read().decode())
+        return make_github_request(url)
     except (HTTPError, URLError, Exception):
         return None
 
@@ -236,12 +267,7 @@ def get_user_repos(username):
     """Fetch user's repositories from GitHub API."""
     try:
         url = f"https://api.github.com/users/{username}/repos?sort=updated&per_page=100"
-        headers = {
-            'User-Agent': 'GitHub-Activity-CLI'
-        }
-        request = Request(url, headers=headers)
-        with urlopen(request) as response:
-            return json.loads(response.read().decode())
+        return make_github_request(url)
     except (HTTPError, URLError, Exception):
         return None
 
@@ -250,12 +276,7 @@ def get_repo_languages(username, repo_name):
     """Fetch language statistics for a repository."""
     try:
         url = f"https://api.github.com/repos/{username}/{repo_name}/languages"
-        headers = {
-            'User-Agent': 'GitHub-Activity-CLI'
-        }
-        request = Request(url, headers=headers)
-        with urlopen(request) as response:
-            return json.loads(response.read().decode())
+        return make_github_request(url)
     except (HTTPError, URLError, Exception):
         return None
 
@@ -527,6 +548,14 @@ def main():
             i += 1
 
     print(f"\nFetching GitHub information for {username}...")
+    print("=" * 50)
+
+    # Show authentication status
+    if GITHUB_TOKEN:
+        print("✓ Using GitHub authentication token")
+    else:
+        print("! No GitHub token found. Using unauthenticated requests (rate limited)")
+        print("  Set GITHUB_TOKEN environment variable to increase rate limits")
     print("=" * 50)
 
     # Fetch and display user profile if requested
