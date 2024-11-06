@@ -1,0 +1,373 @@
+EXPENSE TRACKER CLI - COMMAND REFERENCE
+=====================================
+
+COMMAND EXECUTION METHODS:
+------------------------
+Method 1 (Global Installation):
+expense-tracker <command> [options]
+
+Method 2 (Direct Node Execution):
+node src/index.js <command> [options]
+
+EXPENSE MANAGEMENT
+-----------------
+1. Add Expense:
+   Global: expense-tracker add -d <description> -a <amount> [-c <category>] [-t <tags>] [-n <notes>]
+   Direct: node src/index.js add -d <description> -a <amount> [-c <category>] [-t <tags>] [-n <notes>]
+   Example: expense-tracker add -d "Lunch" -a 15.50 -c food -t "meals,work" -n "Team lunch"
+
+2. List Expenses:
+   Global: expense-tracker list
+   Direct: node src/index.js list
+
+3. Delete Expense:
+   Global: expense-tracker delete -i <id>
+   Direct: node src/index.js delete -i <id>
+   Example: expense-tracker delete -i 1
+
+4. Update Expense:
+   Global: expense-tracker update -i <id> [-d <description>] [-a <amount>] [-c <category>] [-t <tags>] [-n <notes>]
+   Direct: node src/index.js update -i <id> [-d <description>] [-a <amount>] [-c <category>] [-t <tags>] [-n <notes>]
+   Example: expense-tracker update -i 1 -a 20.00 -n "Updated amount"
+
+5. Summary:
+   Global: expense-tracker summary [-m <month>]
+   Direct: node src/index.js summary [-m <month>]
+   Example: expense-tracker summary -m 3
+
+CATEGORY MANAGEMENT
+------------------
+1. Add Category:
+   Global: expense-tracker category add -n <name> [-d <description>]
+   Direct: node src/index.js category add -n <name> [-d <description>]
+   Example: expense-tracker category add -n groceries -d "Food and household items"
+
+2. List Categories:
+   Global: expense-tracker category list
+   Direct: node src/index.js category list
+
+3. Delete Category:
+   Global: expense-tracker category delete -n <name>
+   Direct: node src/index.js category delete -n <name>
+   Example: expense-tracker category delete -n groceries
+
+4. View Category Expenses:
+   Global: expense-tracker category expenses -n <name> [-m <month>]
+   Direct: node src/index.js category expenses -n <name> [-m <month>]
+   Example: expense-tracker category expenses -n groceries -m 3
+
+BUDGET MANAGEMENT
+----------------
+1. Set Budget:
+   Global: expense-tracker budget set -m <month> -a <amount>
+   Direct: node src/index.js budget set -m <month> -a <amount>
+   Example: expense-tracker budget set -m 3 -a 1000
+
+2. View Budget:
+   Global: expense-tracker budget view [-m <month>]
+   Direct: node src/index.js budget view [-m <month>]
+   Example: expense-tracker budget view -m 3
+
+3. Check Budget Status:
+   Global: expense-tracker budget status [-m <month>]
+   Direct: node src/index.js budget status [-m <month>]
+   Example: expense-tracker budget status
+
+REPORTING
+---------
+1. Monthly Report:
+   Global: expense-tracker report monthly [-m <month>]
+   Direct: node src/index.js report monthly [-m <month>]
+   Example: expense-tracker report monthly -m 3
+
+2. Compare Months:
+   Global: expense-tracker report compare --month1 <month1> --month2 <month2>
+   Direct: node src/index.js report compare --month1 <month1> --month2 <month2>
+   Example: expense-tracker report compare --month1 3 --month2 4
+
+DATA EXPORT
+----------
+1. Export to CSV:
+   Global: expense-tracker export [-m <month>] [-o <output_path>]
+   Direct: node src/index.js export [-m <month>] [-o <output_path>]
+   Example: expense-tracker export -m 3 -o "march-expenses.csv"
+
+NOTATION:
+- <> indicates required parameter
+- [] indicates optional parameter
+- All month parameters should be numbers 1-12
+- Amounts should be positive numbers
+- Tags should be comma-separated
+
+INSTALLATION:
+------------
+To enable global commands (Method 1):
+1. Make the file executable:
+   chmod +x src/index.js
+2. Install globally:
+   npm install -g .
+
+To uninstall global installation:
+npm uninstall -g expense-tracker
+
+ANALYSIS & INSIGHTS
+------------------
+1. Trends:
+   Global: expense-tracker trends [-c <category>] [-m <months>]
+   Direct: node src/index.js trends [-c <category>] [-m <months>]
+   Example: expense-tracker trends -c food -m 6
+   Description: Show spending trends over time
+
+2. Statistics:
+   Global: expense-tracker stats [-m <month>]
+   Direct: node src/index.js stats [-m <month>]
+   Example: expense-tracker stats -m 3
+   Description: Show detailed statistical analysis
+
+DATA MANAGEMENT
+--------------
+1. Backup:
+   Global: expense-tracker backup [-o <output_path>]
+   Direct: node src/index.js backup [-o <output_path>]
+   Example: expense-tracker backup -o "./backups"
+
+2. Import:
+   Global: expense-tracker import -f <file_path>
+   Direct: node src/index.js import -f <file_path>
+   Example: expense-tracker import -f "./expenses_backup.json"
+
+3. Clean:
+   Global: expense-tracker clean [-d <days>]
+   Direct: node src/index.js clean [-d <days>]
+   Example: expense-tracker clean -d 365
+   Description: Remove old/duplicate entries
+
+TAGS MANAGEMENT
+--------------
+1. Add Tags:
+   Global: expense-tracker tags add -i <expense_id> -t <tags>
+   Direct: node src/index.js tags add -i <expense_id> -t <tags>
+   Example: expense-tracker tags add -i 1 -t "important,tax-deductible"
+
+2. List Tags:
+   Global: expense-tracker tags list
+   Direct: node src/index.js tags list
+
+3. Search by Tags:
+   Global: expense-tracker tags search -t <tags>
+   Direct: node src/index.js tags search -t <tags>
+   Example: expense-tracker tags search -t "tax-deductible"
+
+TEST COMMANDS SEQUENCE
+--------------------
+## 0. Setup & Installation
+# Install dependencies
+npm install
+
+# Make the CLI executable
+chmod +x src/index.js
+
+# Link the package for global usage
+npm link
+
+## 1. Help Commands
+# Show general help
+expense-tracker --help
+
+# Show help for specific command
+expense-tracker add --help
+expense-tracker category --help
+expense-tracker budget --help
+
+## 2. Category Setup (Must run first)
+# List default categories
+expense-tracker category list
+
+# Add essential categories
+expense-tracker category add -n food -d "Food and dining expenses"
+expense-tracker category add -n transport -d "Transportation costs"
+expense-tracker category add -n utilities -d "Monthly bills and utilities"
+expense-tracker category add -n healthcare -d "Medical expenses"
+expense-tracker category add -n entertainment -d "Entertainment and leisure"
+
+## 3. Budget Setup
+# Set monthly budgets
+expense-tracker budget set -m 3 -a 1000
+expense-tracker budget set -m 4 -a 1200
+
+# View budgets
+expense-tracker budget view
+
+## 4. Adding Various Expenses
+# Basic expenses
+expense-tracker add -d "Lunch" -a 15.50 -c food
+expense-tracker add -d "Bus ticket" -a 25.00 -c transport
+expense-tracker add -d "Internet bill" -a 60.00 -c utilities
+
+# Expenses with tags and notes
+expense-tracker add -d "Movie tickets" -a 30.00 -c entertainment -t "weekend,friends" -n "Weekend movie with friends"
+expense-tracker add -d "Grocery shopping" -a 85.75 -c food -t "monthly,essential" -n "Monthly grocery run"
+
+## 5. Viewing & Analysis
+# List all expenses
+expense-tracker list
+
+# View monthly summary
+expense-tracker summary
+
+# View category-specific expenses
+expense-tracker category expenses -n food
+
+# Generate monthly report
+expense-tracker report monthly
+
+## 6. Data Management
+# Export data
+expense-tracker export -o march_expenses.csv
+
+# Backup will be created automatically in data/expenses.json.backup
+
+## 7. Maintenance Commands
+# Update expense
+expense-tracker update -i 1 -a 18.50 -t "updated,modified" -n "Updated entry"
+
+# Delete expense
+expense-tracker delete -i 1
+
+## 8. Advanced Reports
+# Compare months
+expense-tracker report compare --month1 3 --month2 4
+
+# Check budget status
+expense-tracker budget status
+
+## 9. Category Management
+# View category expenses
+expense-tracker category expenses -n food -m 3
+
+# Delete unused category
+expense-tracker category delete -n entertainment
+
+## 10. Verification Commands
+# Verify after each major operation
+expense-tracker list
+expense-tracker summary
+expense-tracker budget view
+
+TESTING SEQUENCE WITH EXAMPLE DATA
+--------------------------------
+1. Initial Setup:
+   # Install dependencies and prepare application
+   npm install
+   chmod +x src/index.js
+   npm link
+
+2. Category Setup:
+   # Add test categories
+   expense-tracker category add -n food -d "Food and dining"
+   > Output: Category 'food' added successfully
+
+   expense-tracker category add -n transport -d "Transportation"
+   > Output: Category 'transport' added successfully
+
+   # Verify categories
+   expense-tracker category list
+   > Output:
+   > Available Categories:
+   > --------------------
+   > food:
+   >   Description: Food and dining
+   > transport:
+   >   Description: Transportation
+
+3. Budget Setup:
+   # Set monthly budget
+   expense-tracker budget set -m 3 -a 1000
+   > Output: Budget set for month 3: $1000.00 (PKR 280,000.00)
+
+   # View budget
+   expense-tracker budget view
+   > Output: Budget for month 3: $1000.00 (PKR 280,000.00)
+
+4. Add Test Expenses:
+   # Add food expense
+   expense-tracker add -d "Lunch" -a 15.50 -c food -t "lunch,work"
+   > Output: Expense added successfully (ID: 1)
+
+   # Add transport expense in PKR
+   expense-tracker add -d "Bus ticket" -a 1000 -c transport --currency PKR
+   > Output: Expense added successfully (ID: 2)
+
+   # Add expense with notes
+   expense-tracker add -d "Dinner" -a 25.75 -c food -n "Team dinner" -t "dinner,work"
+   > Output: Expense added successfully (ID: 3)
+
+5. View and Verify:
+   # List all expenses
+   expense-tracker list
+   > Output:
+   > ID  Date        Description  Amount           Category  Tags
+   > 1   2024-03-15  Lunch       $15.50/PKR 4,340  food     [lunch,work]
+   > 2   2024-03-15  Bus ticket  $3.57/PKR 1,000   transport [commute]
+   > 3   2024-03-15  Dinner      $25.75/PKR 7,210  food     [dinner,work]
+
+   # View summary
+   expense-tracker summary
+   > Output:
+   > Total expenses: $44.82 (PKR 12,550)
+   > Category breakdown:
+   > food: $41.25 (92%)
+   > transport: $3.57 (8%)
+
+6. Update and Delete:
+   # Update expense
+   expense-tracker update -i 1 -a 18.50 -n "Updated lunch cost"
+   > Output: Expense updated successfully
+
+   # Delete expense
+   expense-tracker delete -i 2
+   > Output: Expense deleted successfully (ID: 2)
+
+7. Export Data:
+   # Export to CSV
+   expense-tracker export -o test_expenses.csv
+   > Output: Expenses exported successfully to test_expenses.csv
+   > File contains:
+   > ID,Date,Description,Amount (USD),Amount (PKR),Category,Tags,Notes
+   > 1,2024-03-15,Lunch,18.50,5180,food,lunch;work,Updated lunch cost
+   > 3,2024-03-15,Dinner,25.75,7210,food,dinner;work,Team dinner
+
+8. Check Budget Status:
+   expense-tracker budget status
+   > Output:
+   > Budget Status for Month 3:
+   > Budget: $1000.00 (PKR 280,000)
+   > Spent: $44.25 (PKR 12,390)
+   > Remaining: $955.75 (PKR 267,610)
+   > Used: 4.4%
+
+9. Category Analysis:
+   expense-tracker category expenses -n food
+   > Output:
+   > Expenses for category 'food':
+   > --------------------
+   > 2024-03-15 - Lunch: $18.50 (PKR 5,180)
+   > 2024-03-15 - Dinner: $25.75 (PKR 7,210)
+   > --------------------
+   > Total: $44.25 (PKR 12,390)
+
+10. Cleanup Test Data:
+    # Delete test expenses
+    expense-tracker delete -i 1
+    expense-tracker delete -i 3
+
+    # Delete test categories
+    expense-tracker category delete -n transport
+    expense-tracker category delete -n food
+
+Expected Results:
+- All commands should execute without errors
+- Data should be properly stored and retrieved
+- Currency conversion should work correctly
+- Summaries and reports should be accurate
+- Exports should contain all data fields

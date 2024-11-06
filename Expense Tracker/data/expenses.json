@@ -1,0 +1,32 @@
+{
+  "expenses": [
+    {
+      "id": "1730854388925",
+      "timestamp": "2024-11-06T00:53:08.929Z",
+      "amount": 5,
+      "description": "banana",
+      "category": "Food & Dining",
+      "date": "2024-11-06T00:53:08.924Z",
+      "modifiedAt": "2024-11-06T22:33:57.791Z"
+    },
+    {
+      "id": "1730916196608",
+      "timestamp": "2024-11-06T18:03:16.610Z",
+      "amount": 10,
+      "description": "apple",
+      "category": "Food & Dining",
+      "date": "2024-11-06T18:03:16.596Z"
+    },
+    {
+      "id": "1730916572050",
+      "timestamp": "2024-11-06T18:09:32.050Z",
+      "amount": 75,
+      "description": "commute",
+      "category": "Transportation",
+      "date": "2024-11-06T18:09:32.049Z"
+    }
+  ],
+  "budgets": {
+    "Food & Dining": 500
+  }
+}

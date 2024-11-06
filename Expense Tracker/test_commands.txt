@@ -1,0 +1,95 @@
+# Expense Tracker Test Commands
+
+## 0. Setup & Installation
+# Install dependencies
+npm install
+
+# Make the CLI executable
+chmod +x src/index.js
+
+# Link the package for global usage
+npm link
+
+## 1. Help Commands
+# Show general help
+expense-tracker --help
+
+# Show help for specific command
+expense-tracker add --help
+expense-tracker category --help
+expense-tracker budget --help
+
+## 2. Category Setup (Must run first)
+# List default categories
+expense-tracker category list
+
+# Add essential categories
+expense-tracker category add -n food -d "Food and dining expenses"
+expense-tracker category add -n transport -d "Transportation costs"
+expense-tracker category add -n utilities -d "Monthly bills and utilities"
+expense-tracker category add -n healthcare -d "Medical expenses"
+expense-tracker category add -n entertainment -d "Entertainment and leisure"
+
+## 3. Budget Setup
+# Set monthly budgets
+expense-tracker budget set -m 3 -a 1000
+expense-tracker budget set -m 4 -a 1200
+
+# View budgets
+expense-tracker budget view
+
+## 4. Adding Various Expenses
+# Basic expenses
+expense-tracker add -d "Lunch" -a 15.50 -c food
+expense-tracker add -d "Bus ticket" -a 25.00 -c transport
+expense-tracker add -d "Internet bill" -a 60.00 -c utilities
+
+# Expenses with tags and notes
+expense-tracker add -d "Movie tickets" -a 30.00 -c entertainment -t "weekend,friends" -n "Weekend movie with friends"
+expense-tracker add -d "Grocery shopping" -a 85.75 -c food -t "monthly,essential" -n "Monthly grocery run"
+
+## 5. Viewing & Analysis
+# List all expenses
+expense-tracker list
+
+# View monthly summary
+expense-tracker summary
+
+# View category-specific expenses
+expense-tracker category expenses -n food
+
+# Generate monthly report
+expense-tracker report monthly
+
+## 6. Data Management
+# Export data
+expense-tracker export -o march_expenses.csv
+
+# Backup will be created automatically in data/expenses.json.backup
+
+## 7. Maintenance Commands
+# Update expense
+expense-tracker update -i 1 -a 18.50 -t "updated,modified" -n "Updated entry"
+
+# Delete expense
+expense-tracker delete -i 1
+
+## 8. Advanced Reports
+# Compare months
+expense-tracker report compare --month1 3 --month2 4
+
+# Check budget status
+expense-tracker budget status
+
+## 9. Category Management
+# View category expenses
+expense-tracker category expenses -n food -m 3
+
+# Delete unused category
+expense-tracker category delete -n entertainment
+
+## 10. Verification Commands
+# Verify after each major operation
+expense-tracker list
+expense-tracker summary
+expense-tracker budget view

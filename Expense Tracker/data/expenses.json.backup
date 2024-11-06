@@ -1,0 +1,38 @@
+{
+  "expenses": [
+    {
+      "id": 1,
+      "description": "Weekly groceries",
+      "amount": 75.5,
+      "category": "groceries",
+      "date": "2024-11-05T19:41:32.485Z",
+      "tags": [
+        "food",
+        "weekly"
+      ],
+      "notes": "Monthly shopping"
+    }
+  ],
+  "metadata": {
+    "lastId": 1
+  },
+  "categories": {
+    "food": {
+      "description": "Food and dining expenses",
+      "color": "green"
+    },
+    "transport": {
+      "description": "Transportation expenses",
+      "color": "blue"
+    },
+    "utilities": {
+      "description": "Bills and utilities",
+      "color": "yellow"
+    },
+    "groceries": {
+      "description": "Food and household items",
+      "color": "default"
+    }
+  },
+  "budgets": {}
+}
